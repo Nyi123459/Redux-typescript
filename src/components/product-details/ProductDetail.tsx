@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { AppContext } from "../../App";
@@ -7,31 +7,29 @@ import "./ProductDetails.styles.scss";
 import RootState from "../../redux/store"; // Assuming you have a RootState type in your store
 
 const ProductDetail: React.FC = () => {
-  const [singleProduct, setSingleProduct] = React.useState<any>([]);
   const { selectedProductState } = React.useContext(AppContext);
   const dispatch = useDispatch();
   const { loading, error } = selectedProductState;
   const { id } = useParams<{ id: string }>();
 
-  const singleProd = useSelector((state: typeof RootState) => state.product.product);
+  const singleProd = useSelector(
+    (state: typeof RootState) => state.product.product
+  );
 
   console.log("singleProd", singleProd);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Dispatch the action to fetch the product
-        await dispatch(fetchProduct(parseInt(id, 10))); // Parse id as an integer
-        // setSingleProduct(data);
+        if (id) await dispatch(fetchProduct(id) as any);
       } catch (error) {
         console.error("Error fetching product:", error);
       }
     };
 
     fetchData();
-  }, [dispatch, id]); // Include id as a dependency so useEffect is triggered when id changes
+  }, [dispatch, id]);
 
-  // console.log("Single Product", singleProduct);
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -60,7 +58,7 @@ const ProductDetail: React.FC = () => {
           <p className="category">{singleProd?.category}</p>
         </div>
         <div className="thumbnail-container">
-          {singleProd?.images.map((image, index) => (
+          {singleProd?.images.map((image: any, index: any) => (
             <img
               key={index}
               src={image}

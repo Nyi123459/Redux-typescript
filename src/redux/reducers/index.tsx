@@ -1,11 +1,13 @@
-import { combineReducers, Reducer, Action } from "redux";
+import { combineReducers, Reducer } from "redux";
 import { productsReducer, selectedProductReducer } from "./productsReducer";
 import { ActionTypes } from "../../constants/action-types";
 import { Product } from "../actions/productActions";
+import { initialSelectedProductState, initialState } from "./productsReducer";
 
-// Define a custom action type that extends Action<string>
-interface CustomAction extends Action {
-  payload?: any; // Adjust this according to your payload structure
+interface RootState {
+  products: typeof initialState;
+  product: typeof initialSelectedProductState;
+  // Add other state slices if needed
 }
 
 type RootAction =
@@ -17,11 +19,6 @@ type RootAction =
   | { type: ActionTypes.FETCH_PRODUCT_FAILURE; payload: any };
 
 // Define the root state type
-interface RootState {
-  products: ReturnType<typeof productsReducer>;
-  product: ReturnType<typeof selectedProductReducer>;
-  // Add other state slices if needed
-}
 
 const rootReducer: Reducer<RootState, RootAction> = combineReducers({
   products: productsReducer,

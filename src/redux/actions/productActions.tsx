@@ -3,7 +3,7 @@ import { Dispatch } from "redux";
 
 export interface Product {
   // Define the structure of your product
-  id: number;
+  id: string;
   title: string;
   description: string;
   price: number;
@@ -41,7 +41,7 @@ export const fetchProducts = () => {
   };
 };
 
-export const fetchProduct = (id: number) => {
+export const fetchProduct = (id: string) => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch({ type: ActionTypes.FETCH_SELECTED_PRODUCT });

@@ -2,19 +2,7 @@
 
 import { ActionTypes } from "../../constants/action-types";
 
-interface Product {
-  id: number;
-  title: string;
-  description: string;
-  price: number;
-  discountPercentage: number;
-  rating: number;
-  stock: number;
-  brand: string;
-  category: string;
-  thumbnail: string;
-  images: string[];
-}
+import { Product } from "../actions/productActions";
 
 interface ProductsState {
   products: Product[];
@@ -22,7 +10,7 @@ interface ProductsState {
   error: any; // Replace with the actual type of your error handling
 }
 
-const initialState: ProductsState = {
+export const initialState: ProductsState = {
   products: [],
   loading: false,
   error: null,
@@ -55,7 +43,7 @@ interface SelectedProductState {
   error: any; // Replace with the actual type of your error handling
 }
 
-const initialSelectedProductState: SelectedProductState = {
+export const initialSelectedProductState: SelectedProductState = {
   product: null,
   loading: false,
   error: null,

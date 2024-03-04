@@ -1,11 +1,6 @@
-import React, {
-  createContext,
-  useReducer,
-  useEffect,
-  useState,
-  Dispatch,
-} from "react";
-import { BrowserRouter, Route, Routes, useParams } from "react-router-dom";
+import React, { createContext, useReducer, useEffect, useState } from "react";
+import { Dispatch } from "redux";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import ProductList from "./components/productlist/ProductList";
 import ProductDetail from "./components/product-details/ProductDetail";
@@ -17,7 +12,6 @@ import {
   productsReducer,
   selectedProductReducer,
 } from "./redux/reducers/productsReducer";
-import { ActionTypes } from "./constants/action-types";
 
 interface AppState {
   products: Product[];
