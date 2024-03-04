@@ -1,0 +1,111 @@
+// General layout
+.product-container {
+  margin: 100px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0 0 10px rgba(167, 34, 34, 0.1); // Add shadow to the container
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+// Image container
+.image-container {
+  margin: 20px;
+  flex: 1;
+  max-width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); // Add shadow to the container
+  border-radius: 10px; // Add border-radius to create rounded corners
+  img {
+    background-color: #f7eeee;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px; // Add border-radius to the image
+  }
+}
+
+// Detail container
+.detail-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  @media (max-width: 768px) {
+    gap: 15px;
+  }
+}
+
+// Header container
+.header {
+  &.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    // box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); // Add shadow to the container
+    border-radius: 5px; // Add border-radius to create rounded corners
+  }
+
+  .title {
+    margin-left: 0;
+    font-weight: bold;
+  }
+  .price {
+    color: rgb(138, 40, 40);
+    margin-left: 30px;
+    margin-right: 30px;
+  }
+}
+
+// Product detail container
+.product-detail-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  .disountPercentage {
+    color: green;
+  }
+}
+
+// Thumbnail container
+.thumbnail-container {
+  display: flex;
+  gap: 30px;
+  overflow-x: auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.image-thumbnail {
+  cursor: pointer;
+  &:hover {
+    opacity: 0.8;
+    box-shadow: 0 0 10px rgba(77, 27, 27, 0.1); // Add shadow on hover
+    border-radius: 5px; // Add border-radius on hover
+  }
+}
+
+// Button
+.button-container {
+  padding: 1rem 2vw; // Use viewport width for responsive padding
+  margin-right: 25vw; // Use viewport width for responsive margin
+  max-width: 100%; // Ensure the button container doesn't exceed the viewport width
+  background-color: #9a7676;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); // Add shadow to the button
+
+  @media screen and (max-width: 768px) {
+    // Adjust styles for smaller screens
+    padding: 1rem; // Adjust padding as needed
+    margin-right: 0; // Remove right margin on smaller screens
+  }
+}
