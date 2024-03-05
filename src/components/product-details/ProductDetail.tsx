@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppContext } from "../../App";
 import { fetchProduct } from "../../redux/actions/productActions";
 import "./ProductDetails.styles.scss";
-import RootState from "../../redux/store"; // Assuming you have a RootState type in your store
+import { Rootstate } from "../../redux/reducers";
 
 const ProductDetail: React.FC = () => {
   const { selectedProductState } = React.useContext(AppContext);
@@ -12,9 +12,7 @@ const ProductDetail: React.FC = () => {
   const { loading, error } = selectedProductState;
   const { id } = useParams<{ id: string }>();
 
-  const singleProd = useSelector(
-    (state: typeof RootState) => state.product.product
-  );
+  const singleProd = useSelector((state: Rootstate) => state?.product?.product);
 
   console.log("singleProd", singleProd);
 

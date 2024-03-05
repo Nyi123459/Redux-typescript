@@ -1,10 +1,9 @@
 // productsReducer.ts
-
 import { ActionTypes } from "../../constants/action-types";
 
 import { Product } from "../actions/productActions";
 
-interface ProductsState {
+export interface ProductsState {
   products: Product[];
   loading: boolean;
   error: any; // Replace with the actual type of your error handling
@@ -37,7 +36,7 @@ export const productsReducer = (
   }
 };
 
-interface SelectedProductState {
+export interface SelectedProductState {
   loading: boolean;
   product: Product | null;
   error: any; // Replace with the actual type of your error handling

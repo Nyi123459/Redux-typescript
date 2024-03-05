@@ -51,7 +51,7 @@ export const fetchProduct = (id: string) => {
 
       dispatch({
         type: ActionTypes.FETCH_PRODUCT_SUCCESS,
-        payload: data as Product, // Assuming the API response directly represents a single product
+        payload: data as Product, 
       });
     } catch (error: any) {
       dispatch({
