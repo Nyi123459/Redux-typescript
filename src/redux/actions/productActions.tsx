@@ -23,20 +23,18 @@ export const fetchProducts = () => {
 
       const response = await fetch("https://dummyjson.com/products");
       const data = await response.json();
-
       dispatch({
         type: ActionTypes.FETCH_PRODUCTS_SUCCESS,
-        payload: data.products as Product[],
+        payload: data.products || [],
       });
-
-      return data.products as Product[];
+      return data.products;
     } catch (error: any) {
       dispatch({
         type: ActionTypes.FETCH_PRODUCTS_FAILURE,
         payload: error.message,
       });
 
-      throw error; // Throw the error to be caught in the component
+      throw error;
     }
   };
 };
@@ -51,7 +49,7 @@ export const fetchProduct = (id: string) => {
 
       dispatch({
         type: ActionTypes.FETCH_PRODUCT_SUCCESS,
-        payload: data as Product, 
+        payload: data as Product,
       });
     } catch (error: any) {
       dispatch({
