@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppContext } from "../../App";
 import { fetchProduct } from "../../redux/actions/productActions";
 import "./ProductDetails.styles.scss";
+import { Product } from "../../redux/actions/productActions";
 import { Rootstate } from "../../redux/reducers";
 
 const ProductDetail: React.FC = () => {
@@ -12,14 +13,14 @@ const ProductDetail: React.FC = () => {
   const { loading, error } = selectedProductState;
   const { id } = useParams<{ id: string }>();
 
-  const singleProd = useSelector((state: Rootstate) => state?.product?.product);
-
-  console.log("singleProd", singleProd);
+  const singleProd = useSelector<Rootstate, Product | null>(
+    (state) => state.product.product
+  );
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (id) await dispatch(fetchProduct(id) as any);
+        if (id) await dispatch(fetchProduct(parseInt(id)) as any);
       } catch (error) {
         console.error("Error fetching product:", error);
       }
@@ -70,5 +71,7 @@ const ProductDetail: React.FC = () => {
     </div>
   );
 };
+
+export const getProduct = (state: Rootstate) => state.product.product;
 
 export default ProductDetail;
