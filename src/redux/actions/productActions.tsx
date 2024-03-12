@@ -48,10 +48,9 @@ export const fetchProduct = (id: string) => {
 
       const response = await fetch(`https://dummyjson.com/products/${id}`);
       const data = await response.json();
-
       dispatch({
         type: ActionTypes.FETCH_PRODUCT_SUCCESS,
-        payload: data as Product, 
+        payload: data as Product,
       });
     } catch (error: any) {
       dispatch({

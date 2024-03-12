@@ -1,10 +1,21 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { AppContext } from "../../App";
 import "./ProductLists.styles.scss";
+import { fetchProducts } from "../../redux/actions/productActions";
+import { Dispatch } from "redux";
 
 const ProductList: React.FC = () => {
+  const dispatch = useDispatch();
   const { state } = useContext(AppContext);
+
+  useEffect(() => {
+    const fetchedProducts = async () => {
+      await fetchProducts()(dispatch as Dispatch);
+    };
+    fetchedProducts();
+  }, [dispatch]);
 
   return (
     <div>

@@ -16,18 +16,18 @@ import {
 interface AppState {
   products: Product[];
   loading: boolean;
-  error: any; // Change the type based on your error handling
+  error: any;
 }
 
 interface SelectedProductState {
   loading: boolean;
   product: Product | null;
-  error: any; // Change the type based on your error handling
+  error: any;
 }
 
 export const AppContext = createContext<{
   state: AppState;
-  dispatch: React.Dispatch<any>; // Adjust the type based on your actions
+  dispatch: React.Dispatch<any>;
   selectedProductState: SelectedProductState;
   selectedProductDispatch: React.Dispatch<any>; // Adjust the type based on your actions
 }>({

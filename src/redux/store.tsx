@@ -1,4 +1,3 @@
-// store.js
 import { createStore, applyMiddleware, compose } from "redux";
 import { thunk, ThunkMiddleware } from "redux-thunk";
 import rootReducer from "../redux/reducers";
@@ -14,7 +13,7 @@ const composeEnhancers =
 
 const store = createStore(
   rootReducer,
-  composeEnhancers(applyMiddleware(thunk))
+  composeEnhancers(applyMiddleware(thunk as ThunkMiddleware)) // Apply both thunk and logger middleware
 );
 
 export default store;
