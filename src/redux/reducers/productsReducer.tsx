@@ -28,7 +28,6 @@ export const productsReducer = (
     case ActionTypes.FETCH_PRODUCTS_REQUEST:
       return { ...state, loading: true, error: null };
     case ActionTypes.FETCH_PRODUCTS_SUCCESS:
-      // console.log("Products payload:", payload);
       return {
         ...state,
         loading: false,
