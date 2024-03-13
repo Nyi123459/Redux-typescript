@@ -9,7 +9,10 @@ describe("productsReducer", () => {
   });
 
   it("should handle FETCH_PRODUCTS_REQUEST", () => {
-    const action = { type: ActionTypes.FETCH_PRODUCTS_REQUEST, payload: [] };
+    const action = {
+      type: ActionTypes.FETCH_PRODUCTS_REQUEST,
+      payload: [] as Product[],
+    };
     const expectedState = { ...initialState, loading: true, error: null };
     expect(productsReducer(initialState, action)).toEqual(expectedState);
   });
@@ -43,7 +46,7 @@ describe("productsReducer", () => {
   });
 
   it("should handle unknown actions", () => {
-    const unknownAction = { type: "UNKNOWN_ACTION", payload: [] };
+    const unknownAction = { type: "UNKNOWN_ACTION", payload: [] as Product[] };
     expect(productsReducer(initialState, unknownAction)).toEqual(initialState);
   });
 });
@@ -52,6 +55,7 @@ import {
   selectedProductReducer,
   initialSelectedProductState,
 } from "./productsReducer";
+import { Product } from "../actions/productActions";
 
 describe("selectedProductReducer", () => {
   it("should return initial state", () => {
@@ -61,7 +65,10 @@ describe("selectedProductReducer", () => {
   });
 
   it("should handle FETCH_SELECTED_PRODUCT", () => {
-    const action = { type: ActionTypes.FETCH_SELECTED_PRODUCT, payload: [] };
+    const action = {
+      type: ActionTypes.FETCH_SELECTED_PRODUCT,
+      payload: [] as Product[],
+    };
     const expectedState = {
       ...initialSelectedProductState,
       loading: true,
@@ -105,7 +112,7 @@ describe("selectedProductReducer", () => {
   });
 
   it("should handle unknown actions", () => {
-    const unknownAction = { type: "UNKNOWN_ACTION", payload: [] };
+    const unknownAction = { type: "UNKNOWN_ACTION", payload: [] as Product[] };
     expect(
       selectedProductReducer(initialSelectedProductState, unknownAction)
     ).toEqual(initialSelectedProductState);
