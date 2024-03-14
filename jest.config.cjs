@@ -1,6 +1,6 @@
 module.exports = {
   preset: "ts-jest",
-  testEnvironment: "node",
+  testEnvironment: "jest-environment-jsdom", // Change test environment to jest-environment-jsdom
   transform: {
     "^.+\\.tsx?$": "ts-jest",
     "^.+\\.scss$": "jest-transform-stub",

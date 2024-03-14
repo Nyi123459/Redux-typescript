@@ -39,3 +39,9 @@ const ProductList: React.FC = () => {
 };
 
 export default ProductList;
+export class selectProducts {
+  static mockImplementation: any;
+  constructor() {
+    useSelector((state: Rootstate) => state?.products?.products);
+  }
+}
