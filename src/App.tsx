@@ -8,6 +8,10 @@ import {
   selectedProductReducer,
 } from "./redux/reducers/productsReducer";
 
+import Authentication from "./routes/authentication/authentication";
+
+import Navigation from "./routes/navigation/navigation";
+
 import ProductList from "./components/productlist/ProductList";
 
 import ProductDetail from "./components/product-details/ProductDetail";
@@ -90,8 +94,10 @@ const App: React.FC = () => {
       }}>
       <BrowserRouter>
         <Routes>
+          {/* <Route path="/" element={<Navigation />} /> */}
           <Route path="/" element={<ProductList />} />
           <Route path="/product/:id" element={<ProductDetail />} />
+          <Route path="auth" element={<Authentication />} />
         </Routes>
       </BrowserRouter>
     </AppContext.Provider>
