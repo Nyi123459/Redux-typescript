@@ -71,4 +71,6 @@ const ProductDetail: React.FC = () => {
   );
 };
 
+export const getProduct = (state: Rootstate) => state.product.product;
+
 export default ProductDetail;

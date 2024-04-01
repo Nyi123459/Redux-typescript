@@ -1,17 +1,20 @@
 import React, { createContext, useReducer, useEffect, useState } from "react";
-import { Dispatch } from "redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-
-import ProductList from "./components/productlist/ProductList";
-import ProductDetail from "./components/product-details/ProductDetail";
+import { Dispatch } from "redux";
 import { fetchProducts } from "./redux/actions/productActions";
-
 import { Product } from "./redux/actions/productActions";
-
 import {
   productsReducer,
   selectedProductReducer,
 } from "./redux/reducers/productsReducer";
+
+import Navigation from "./routes/Navigation/Navigation";
+
+import Authentication from "./routes/Authentication/Authentication";
+
+import ProductList from "./components/productlist/ProductList";
+
+import ProductDetail from "./components/product-details/ProductDetail";
 
 interface AppState {
   products: Product[];
@@ -29,7 +32,7 @@ export const AppContext = createContext<{
   state: AppState;
   dispatch: React.Dispatch<any>;
   selectedProductState: SelectedProductState;
-  selectedProductDispatch: React.Dispatch<any>; // Adjust the type based on your actions
+  selectedProductDispatch: React.Dispatch<any>;
 }>({
   state: {
     products: [],
@@ -61,13 +64,14 @@ const App: React.FC = () => {
     } as SelectedProductState
   );
 
-  const [localLoading, setLocalLoading] = useState(false);
+  const [localLoading, setLocalLoading] = useState(true);
 
   useEffect(() => {
     setLocalLoading(true);
 
     fetchProducts()(dispatch as Dispatch)
-      .then(() => {
+      .then((products) => {
+        console.log("Products", products);
         setLocalLoading(false);
       })
       .catch((error) => {
@@ -75,6 +79,10 @@ const App: React.FC = () => {
         console.error("Error fetching product:", error);
       });
   }, []);
+
+  if (localLoading) {
+    return <h2>Loading ...</h2>;
+  }
 
   return (
     <AppContext.Provider
@@ -85,7 +93,9 @@ const App: React.FC = () => {
         selectedProductDispatch,
       }}>
       <BrowserRouter>
+        <Navigation />
         <Routes>
+          <Route path="auth" element={<Authentication />} />
           <Route path="/" element={<ProductList />} />
           <Route path="/product/:id" element={<ProductDetail />} />
         </Routes>

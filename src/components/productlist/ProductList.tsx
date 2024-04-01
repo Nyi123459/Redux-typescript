@@ -1,10 +1,11 @@
 import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AppContext } from "../../App";
 import "./ProductLists.styles.scss";
 import { fetchProducts } from "../../redux/actions/productActions";
 import { Dispatch } from "redux";
+import { Rootstate } from "../../redux/reducers";
 
 const ProductList: React.FC = () => {
   const dispatch = useDispatch();
@@ -41,3 +42,10 @@ const ProductList: React.FC = () => {
 };
 
 export default ProductList;
+
+export class selectProducts {
+  static mockImplementation: any;
+  constructor() {
+    useSelector((state: Rootstate) => state?.products?.products);
+  }
+}

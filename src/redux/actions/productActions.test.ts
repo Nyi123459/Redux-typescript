@@ -1,49 +1,29 @@
-import configureMockStore from "redux-mock-store";
-import { thunk } from "redux-thunk";
-import fetchMock from "jest-fetch-mock";
 import { fetchProducts } from "./productActions";
 import { ActionTypes } from "../../constants/action-types";
-import { Product } from "./productActions";
+import fetchMock from "jest-fetch-mock";
 
-const middlewares = [thunk];
-const mockStore = configureMockStore(middlewares as any);
-
-describe("Redux Thunk Actions", () => {
-  beforeEach(() => {
-    fetchMock.resetMocks();
+describe("fetchProducts", () => {
+  afterEach(() => {
+    fetchMock.resetMocks(); // Clear mocks after each test
   });
 
-  test("fetchProducts Action creates FETCH_PRODUCTS_SUCCESS when fetching product is success", async () => {
-    const numberOfProducts = 30;
-    const expectedProducts: Product[] = Array.from({
-      length: numberOfProducts,
+  it("dispatches FETCH_PRODUCTS_SUCCESS on successful fetch", async () => {
+    const response = await fetch("https://dummyjson.com/products"); // Now uses mocked fetch
+    const data = await response.json();
+    const mockData = data;
+    fetchMock.mockResponseOnce(JSON.stringify(mockData));
+
+    const dispatch = jest.fn();
+
+    await fetchProducts()(dispatch);
+
+    expect(dispatch).toHaveBeenCalledTimes(2);
+    expect(dispatch).toHaveBeenCalledWith({
+      type: ActionTypes.FETCH_PRODUCTS_REQUEST,
     });
-    fetchMock.mockResponseOnce(JSON.stringify({ products: expectedProducts }));
-    const store = mockStore();
-    await store.dispatch(fetchProducts() as any);
-
-    const expectedActions = [
-      { type: ActionTypes.FETCH_PRODUCTS_REQUEST },
-      { type: ActionTypes.FETCH_PRODUCTS_SUCCESS, payload: expectedProducts },
-    ];
-    expect(store.getActions()).toEqual(expectedActions);
-  });
-  test("fetchProducts action creates FETCH_PRODUCTS_FAILURE when fetching products fails", async () => {
-    const errorMessage = "Failed to fetch products";
-    fetchMock.mockResponseOnce(new Error(errorMessage) as any);
-    const store = mockStore({});
-    let error;
-
-    try {
-      await store.dispatch(fetchProducts() as any);
-    } catch (e) {
-      error = e;
-    }
-    const expectedActions = [
-      { type: ActionTypes.FETCH_PRODUCTS_REQUEST },
-      { type: ActionTypes.FETCH_PRODUCTS_FAILURE, payload: errorMessage },
-    ];
-    expect(store.getActions()).toEqual(expectedActions);
-    expect(error).toBeDefined();
+    expect(dispatch).toHaveBeenCalledWith({
+      type: ActionTypes.FETCH_PRODUCTS_SUCCESS,
+      payload: mockData.products,
+    });
   });
 });

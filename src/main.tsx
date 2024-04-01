@@ -3,6 +3,7 @@ import { Provider } from "react-redux";
 import App from "./App";
 import store from "./redux/store";
 import "./index.css";
+import { UserProvider } from "./context/userContext";
 
 const root = document.getElementById("root");
 
@@ -10,6 +11,8 @@ const root = document.getElementById("root");
 const reactRoot = ReactDOM.createRoot(root as HTMLElement);
 reactRoot.render(
   <Provider store={store}>
-    <App />
+    <UserProvider>
+      <App />
+    </UserProvider>
   </Provider>
 );
