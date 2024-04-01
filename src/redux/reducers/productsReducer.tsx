@@ -6,7 +6,7 @@ import { Product } from "../actions/productActions";
 export interface ProductsState {
   products: Product[];
   loading: boolean;
-  error: any; // Replace with the actual type of your error handling
+  error: any;
 }
 
 export const initialState: ProductsState = {
@@ -28,7 +28,13 @@ export const productsReducer = (
     case ActionTypes.FETCH_PRODUCTS_REQUEST:
       return { ...state, loading: true, error: null };
     case ActionTypes.FETCH_PRODUCTS_SUCCESS:
-      return { ...state, loading: false, products: payload as Product[] };
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        products: payload,
+      };
+      
     case ActionTypes.FETCH_PRODUCTS_FAILURE:
       return { ...state, loading: false, error: payload };
     default:
@@ -39,7 +45,7 @@ export const productsReducer = (
 export interface SelectedProductState {
   loading: boolean;
   product: Product | null;
-  error: any; // Replace with the actual type of your error handling
+  error: any;
 }
 
 export const initialSelectedProductState: SelectedProductState = {

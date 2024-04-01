@@ -29,4 +29,8 @@ describe("Selected Product Reducer", () => {
     const result = selectedProductReducer(undefined, {} as any);
     expect(result).toEqual(initialSelectedProductState);
   });
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> 0c132a48311b8ba37c35262ba66d97f84d53c8dd
