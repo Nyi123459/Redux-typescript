@@ -15,10 +15,22 @@
     .sign-in-button {
       background-color: rgb(105, 104, 104);
       color: white;
-      border: 1px solid black;
+      min-width: 165px;
+      width: auto;
+      height: 50px;
+      letter-spacing: 0.5px;
+      line-height: 50px;
+      padding: 0 35px 0 35px;
+      font-size: 15px;
+      font-family: "Open Sans Condensed";
+      font-weight: bolder;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
 
       &:hover {
-        background-color: black;
+        background-color: rgb(32, 27, 27);
         color: white;
         border: none;
       }
@@ -27,6 +39,19 @@
     .google-sign-in {
       background-color: #4285f4;
       color: white;
+      min-width: 165px;
+      width: auto;
+      height: 50px;
+      letter-spacing: 0.5px;
+      line-height: 50px;
+      padding: 0 35px 0 35px;
+      font-size: 15px;
+      font-family: "Open Sans Condensed";
+      font-weight: bolder;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
 
       &:hover {
         background-color: #395075;

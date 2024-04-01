@@ -30,11 +30,8 @@ describe("Product Selector", () => {
     };
     const store = mockStore(initialState);
     const selectedProduct = getProduct(store.getState() as any);
-<<<<<<< HEAD
     console.log("Selected Product", selectedProduct);
     
-=======
->>>>>>> 0c132a48311b8ba37c35262ba66d97f84d53c8dd
     expect(selectedProduct).toEqual({
       id: 1,
       title: "iPhone 9",
