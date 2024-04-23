@@ -8,7 +8,7 @@ describe("fetchProducts", () => {
   });
 
   it("dispatches FETCH_PRODUCTS_SUCCESS on successful fetch", async () => {
-    const response = await fetch("https://dummyjson.com/products"); // Now uses mocked fetch
+    const response = await fetch("https://dummyjson.com/products");
     const data = await response.json();
     const mockData = data;
     fetchMock.mockResponseOnce(JSON.stringify(mockData));
@@ -28,7 +28,7 @@ describe("fetchProducts", () => {
   });
 
   it("count the array length", async () => {
-    const response = await fetch("https://dummyjson.com/products"); // Now uses mocked fetch
+    const response = await fetch("https://dummyjson.com/products"); 
     const data = await response.json();
     const mockData = data;
 
