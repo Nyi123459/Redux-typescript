@@ -4,7 +4,7 @@ import fetchMock from "jest-fetch-mock";
 
 describe("fetchProducts", () => {
   afterEach(() => {
-    fetchMock.resetMocks(); // Clear mocks after each test
+    fetchMock.resetMocks();
   });
 
   it("dispatches FETCH_PRODUCTS_SUCCESS on successful fetch", async () => {
@@ -25,5 +25,13 @@ describe("fetchProducts", () => {
       type: ActionTypes.FETCH_PRODUCTS_SUCCESS,
       payload: mockData.products,
     });
+  });
+
+  it("count the array length", async () => {
+    const response = await fetch("https://dummyjson.com/products"); // Now uses mocked fetch
+    const data = await response.json();
+    const mockData = data;
+
+    expect(mockData.products.length).toEqual(30);
   });
 });

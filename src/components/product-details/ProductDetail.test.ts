@@ -30,7 +30,6 @@ describe("Product Selector", () => {
     };
     const store = mockStore(initialState);
     const selectedProduct = getProduct(store.getState() as any);
-    console.log("Selected Product", selectedProduct);
     
     expect(selectedProduct).toEqual({
       id: 1,

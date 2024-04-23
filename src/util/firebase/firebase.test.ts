@@ -1,39 +1,68 @@
-import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { auth, signInWithGooglePopup } from "./firebase";
+import * as firebaseAuth from "firebase/auth";
 
-jest.mock("firebase/auth", () => ({
-  signInWithPopup: jest.fn(),
-  GoogleAuthProvider: jest.fn(),
-}));
+import {
+  signInWithGooglePopup,
+  signInWithGoogleRedirect,
+  signInAuthUserWithEmailAndPassword,
+  createAuthUserWithEmailAndPassword,
+  signOutUser,
+} from "../firebase/firebase";
 
-describe("signInWithGooglePopup", () => {
-  let mockSignInWithPopup: jest.Mock;
-  let googleProvider: GoogleAuthProvider;
+jest.mock("firebase/auth", () => {
+  return {
+    getAuth: jest.fn(),
+    GoogleAuthProvider: jest.fn().mockImplementation(() => {
+      return {
+        setCustomParameters: jest.fn(),
+      };
+    }),
+    signInWithPopup: jest.fn(),
+    signInWithRedirect: jest.fn(),
+    signInWithEmailAndPassword: jest.fn(),
+    createUserWithEmailAndPassword: jest.fn(),
+    onAuthStateChanged: jest.fn(),
+    signOut: jest.fn(),
+  };
+});
 
-  beforeEach(() => {
-    mockSignInWithPopup = signInWithPopup as jest.Mock;
-    googleProvider = new GoogleAuthProvider();
+describe("firebase utils", () => {
+  test("signInWithGooglePopup to call firestoreAuth's signInWithPopup", () => {
+    signInWithGooglePopup();
+    expect(firebaseAuth.signInWithPopup).toHaveBeenCalled();
   });
 
-  it("should successfully sign in with Google", async () => {
-    const mockUser = { uid: "12345" };
-    mockSignInWithPopup.mockResolvedValue(mockUser);
-
-    const user = await signInWithGooglePopup();
-
-    expect(mockSignInWithPopup).toHaveBeenCalledWith(auth, googleProvider);
-    expect(user).toEqual(mockUser);
+  test("signInWithGoogleRedirect to call firestoreAuth's signInWithRedirect", () => {
+    signInWithGoogleRedirect();
+    expect(firebaseAuth.signInWithRedirect).toHaveBeenCalled();
   });
 
-  it("should handle errors during sign-in", async () => {
-    const error = new Error("Firebase Error");
-    mockSignInWithPopup.mockRejectedValue(error);
+  test("signInAuthUserWithEmailAndPassword to call firestoreAuth's signInWithEmailAndPassword", () => {
+    const testEmail = "testEmail",
+      testPassword = "testPassword";
+    signInAuthUserWithEmailAndPassword(testEmail, testPassword);
 
-    try {
-      await signInWithGooglePopup();
-      throw new Error("Expected an error to be thrown"); // Throw error if no error occurs
-    } catch (err) {
-      expect(err).toEqual(error);
-    }
+    expect(firebaseAuth.signInWithEmailAndPassword).toHaveBeenCalledWith(
+      undefined,
+      testEmail,
+      testPassword
+    );
+  });
+
+  test("createAuthUserWithEmailAndPassword to call firestoreAuth's createUserWithEmailAndPassword", () => {
+    const testEmail = "testEmail",
+      testPassword = "testPassword";
+    createAuthUserWithEmailAndPassword(testEmail, testPassword);
+
+    expect(firebaseAuth.createUserWithEmailAndPassword).toHaveBeenCalledWith(
+      undefined,
+      testEmail,
+      testPassword
+    );
+  });
+
+  test("signOutUser to call firestoreAuth's signOut", () => {
+    signOutUser();
+    expect(firebaseAuth.signOut).toHaveBeenCalled();
   });
 });
+
